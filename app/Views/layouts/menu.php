@@ -49,13 +49,13 @@
                 <div class="collapse" id="investors">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Add Investors</a>
+                            <a href="<?= base_url('admin/add-investors') ?>" class="nav-link">Add Investors</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Manage Investors</a>
+                            <a href="<?= base_url('admin/manage-investors') ?>" class="nav-link">Manage Investors</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Documents</a>
+                            <a href="<?= base_url('admin/investors-documents') ?>" class="nav-link">Documents</a>
                         </li>
                     </ul>
                 </div>
@@ -69,13 +69,13 @@
                 <div class="collapse" id="staff">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Add Staffs</a>
+                            <a href="<?= base_url('admin/add-staffs') ?>" class="nav-link">Add Staffs</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Manage Staffs</a>
+                            <a href="<?= base_url('admin/manage-staffs') ?>" class="nav-link">Manage Staffs</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Documents</a>
+                            <a href="<?= base_url('admin/staffs-documents') ?>" class="nav-link">Documents</a>
                         </li>
                     </ul>
                 </div>

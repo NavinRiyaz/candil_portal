@@ -8,6 +8,13 @@
         <div class="page-content">
             <div class="row">
                 <div class="col-md-12 grid-margin stretch-card">
+                    <?php if (session()->getFlashdata('status')): ?>
+                        <div class="col-12">
+                            <div class="alert alert-success" role="alert">
+                                <?= session()->getFlashdata('status')  ?>
+                            </div>
+                        </div>
+                    <?php endif; ?>
                     <div class="card">
                         <div class="card-body">
                             <h6 class="card-title">Manage Candil Customers</h6>
@@ -24,24 +31,28 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                        <?php foreach ($customers as $value) : ?>
                                         <tr>
-                                            <td>Customer Name</td>
-                                            <td>customer@candil.com</td>
-                                            <td><span class="badge border border-danger text-danger">Profile Pending</span></td>
-                                            <td>1234567899</td>
+                                            <td><?= $value['name'] ?></td>
+                                            <td><?= $value['email'] ?></td>
                                             <td>
-                                                <span class="badge border border-danger text-danger">Unverified</span>
-                                                <span class="badge border border-danger text-danger">Documents Upload Pending</span>
+                                                <?php if ($value['profile_image'] == null):  ?>
+                                                <span class="badge border border-danger text-danger">Profile Pending</span>
+                                                <?php endif;?>
+                                            </td>
+                                            <td><?= $value['phone'] ?></td>
+                                            <td>
+                                                <span class="badge border border-danger text-danger"><?= $value['status'] ?></span>
+                                                <?php if ($value['resume'] == null):?>
+                                                 <span class="badge border border-danger text-danger">Documents Upload pending</span>
+                                                <?php endif; ?>
                                             </td>
                                             <td>
-                                                <button type="button" class="btn btn-primary btn-icon">
-                                                    <i data-feather="edit"></i>
-                                                </button>
-                                                <button type="button" class="btn btn-danger btn-icon">
-                                                    <i data-feather="trash-2"></i>
-                                                </button>
+                                                <a href="<?= base_url('admin/customers-edit/'.$value['id']) ?>" type="button" class="btn btn-primary btn-icon"><i data-feather="edit"></i></a>
+                                                <a href="<?= base_url('admin/customers-delete/'.$value['id']) ?>" type="button" class="btn btn-danger btn-icon"><i data-feather="trash-2"></i></a>
                                             </td>
                                         </tr>
+                                        <?php endforeach;?>
                                     </tbody>
                                 </table>
                             </div>

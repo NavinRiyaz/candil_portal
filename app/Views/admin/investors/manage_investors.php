@@ -17,7 +17,7 @@
                         <?php endif; ?>
                         <div class="card">
                             <div class="card-body">
-                                <h6 class="card-title">Manage Candil Customers Documents</h6>
+                                <h6 class="card-title">Manage Candil Investors</h6>
                                 <div class="table-responsive">
                                     <table id="dataTableExample" class="table">
                                         <thead>
@@ -25,12 +25,13 @@
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Profile</th>
-                                            <th>Resume</th>
-                                            <th>Proof</th>
+                                            <th>Phone</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <?php foreach ($customers as $value) : ?>
+                                        <?php foreach ($investors as $value) : ?>
                                             <tr>
                                                 <td><?= $value['name'] ?></td>
                                                 <td><?= $value['email'] ?></td>
@@ -39,15 +40,16 @@
                                                         <span class="badge border border-danger text-danger">Profile Pending</span>
                                                     <?php endif;?>
                                                 </td>
+                                                <td><?= $value['phone'] ?></td>
                                                 <td>
-                                                    <?php if ($value['resume'] == null):?>
+                                                    <span class="badge border border-danger text-danger"><?= $value['status'] ?></span>
+                                                    <?php if ($value['id_proof'] == null):?>
                                                         <span class="badge border border-danger text-danger">Documents Upload pending</span>
                                                     <?php endif; ?>
                                                 </td>
                                                 <td>
-                                                    <?php if ($value['proof'] == null):?>
-                                                        <span class="badge border border-danger text-danger">Proof Upload pending</span>
-                                                    <?php endif; ?>
+                                                    <a href="<?= base_url('admin/investors-edit/'.$value['id']) ?>" type="button" class="btn btn-primary btn-icon"><i data-feather="edit"></i></a>
+                                                    <a href="<?= base_url('admin/investors-delete/'.$value['id']) ?>" type="button" class="btn btn-danger btn-icon"><i data-feather="trash-2"></i></a>
                                                 </td>
                                             </tr>
                                         <?php endforeach;?>

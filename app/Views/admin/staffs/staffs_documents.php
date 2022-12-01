@@ -17,7 +17,7 @@
                         <?php endif; ?>
                         <div class="card">
                             <div class="card-body">
-                                <h6 class="card-title">Manage Candil Customers Documents</h6>
+                                <h6 class="card-title">Manage Candil Staffs Documents</h6>
                                 <div class="table-responsive">
                                     <table id="dataTableExample" class="table">
                                         <thead>
@@ -25,12 +25,11 @@
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Profile</th>
-                                            <th>Resume</th>
-                                            <th>Proof</th>
+                                            <th>ID Proof</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <?php foreach ($customers as $value) : ?>
+                                        <?php foreach ($staffs as $value) : ?>
                                             <tr>
                                                 <td><?= $value['name'] ?></td>
                                                 <td><?= $value['email'] ?></td>
@@ -40,13 +39,8 @@
                                                     <?php endif;?>
                                                 </td>
                                                 <td>
-                                                    <?php if ($value['resume'] == null):?>
+                                                    <?php if ($value['id_proof'] == null):?>
                                                         <span class="badge border border-danger text-danger">Documents Upload pending</span>
-                                                    <?php endif; ?>
-                                                </td>
-                                                <td>
-                                                    <?php if ($value['proof'] == null):?>
-                                                        <span class="badge border border-danger text-danger">Proof Upload pending</span>
                                                     <?php endif; ?>
                                                 </td>
                                             </tr>

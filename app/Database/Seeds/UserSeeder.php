@@ -24,8 +24,8 @@ class UserSeeder extends Seeder
                 'status' => 'verified',
             ],
             [
-                'name' => 'Mill Owner',
-                'email' => 'admin@mill.com',
+                'name' => 'Editor',
+                'email' => 'admin@editor.com',
                 'password' => password_hash("12345678", PASSWORD_BCRYPT),
                 'phone' => '1234567890',
                 'profile_image' => '',

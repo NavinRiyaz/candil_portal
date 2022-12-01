@@ -17,7 +17,7 @@ if (is_file(SYSTEMPATH . 'Config/Routes.php')) {
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('UserModel');
+$routes->setDefaultController('User');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -43,9 +43,29 @@ $routes->group('admin', ["filter" => "auth"], static function ($routes) {
     //Admin Root
     $routes->get('/', 'AdminController::index');
 
-    //User Management
+    //User Management Customer Section
     $routes->match(['get', 'post'], 'add-customers', 'AdminController::addCustomers');
     $routes->match(['get', 'post'], 'manage-customers', 'AdminController::manageCustomers');
+    $routes->match(['get', 'post'], 'user-documents', 'AdminController::userDocuments');
+    $routes->match(['get', 'post'], 'customers-edit/(:num)', 'AdminController::editCustomers/$1');
+    $routes->match(['get', 'post'], 'customers-delete/(:num)', 'AdminController::deleteCustomers/$1');
+    $routes->match(['get', 'post'], 'customers-update/(:num)', 'AdminController::updateCustomers/$1');
+
+    //User Management Investors Section
+    $routes->match(['get', 'post'], 'add-investors', 'AdminController::addInvestors');
+    $routes->match(['get', 'post'], 'manage-investors', 'AdminController::manageInvestors');
+    $routes->match(['get', 'post'], 'investors-documents', 'AdminController::investorDocuments');
+    $routes->match(['get', 'post'], 'investors-edit/(:num)', 'AdminController::editInvestors/$1');
+    $routes->match(['get', 'post'], 'investors-delete/(:num)', 'AdminController::deleteInvestors/$1');
+    $routes->match(['get', 'post'], 'investors-update/(:num)', 'AdminController::updateInvestors/$1');
+
+    //User Management Staffs Section
+    $routes->match(['get', 'post'], 'add-staffs', 'AdminController::addStaffs');
+    $routes->match(['get', 'post'], 'manage-staffs', 'AdminController::manageStaffs');
+    $routes->match(['get', 'post'], 'staffs-documents', 'AdminController::staffDocuments');
+    $routes->match(['get', 'post'], 'staffs-edit/(:num)', 'AdminController::editStaffs/$1');
+    $routes->match(['get', 'post'], 'staffs-delete/(:num)', 'AdminController::deleteStaffs/$1');
+    $routes->match(['get', 'post'], 'staffs-update/(:num)', 'AdminController::updateStaffs/$1');
 });
 
 
