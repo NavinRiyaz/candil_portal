@@ -3,9 +3,14 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Database\Migrations\BrainstormCategories;
+use App\Models\BrainstormListModel;
+use App\Models\BrainstormCategoryModel;
 use App\Models\CustomerModel;
 use App\Models\InvestorsModel;
 use App\Models\StaffsModel;
+use App\Models\ThesisCategoryModel;
+use App\Models\ThesisListModel;
 use App\Models\UserModel;
 use Config\Services;
 
@@ -231,7 +236,6 @@ class AdminController extends BaseController
      * User Management - Staffs Management Section Start
      * --------------------------------------------------
      */
-
     public function addStaffs()
     {
         $data = [];
@@ -246,7 +250,7 @@ class AdminController extends BaseController
             ];
 
             if (!$this->validate($rules)){
-                return view("admin/staffs/add_investors", [
+                return view("admin/staffs/add_staffs", [
                     "validation" => $this->validator,
                 ]);
             } else {
@@ -261,7 +265,7 @@ class AdminController extends BaseController
                     'status' => 'unverified',
                 ];
                 if ($staffsModel->insert($data)){
-                    $session->setFlashdata('success', 'Staffs Registered Successfully');
+                    $session->setFlashdata('success', 'Staff Registered Successfully');
                     return redirect()->to(base_url("admin/add-staffs"));
                 }
             }
@@ -313,12 +317,350 @@ class AdminController extends BaseController
         return redirect()->to(base_url("admin/manage-staffs"))->with('status', 'Staff Deleted');
     }
 
-    public function staffDocuments()
+    public function staffsDocuments()
     {
         $staffsModel = new StaffsModel();
         $staffs = $staffsModel->findAll();
         return view("admin/staffs/staffs_documents", [
             "staffs" => $staffs,
         ]);
+    }
+    /**
+     * -------------------------------------------------
+     * User Management - Staffs Management Section Start
+     * -------------------------------------------------
+     */
+    /**
+     * -------------------------------------------------
+     * Candil modules - BrainStorm Management Section Start
+     * -------------------------------------------------
+     */
+    public function brainstormLists() {
+        $brainstormListModel = new BrainstormListModel();
+        $brainstormList = $brainstormListModel->findAll();
+        return view("admin/brainstorm/brainstorm_list", [
+            "brainstorm" => $brainstormList,
+        ]);
+    }
+    public function brainstormPendingList()
+    {
+        $brainstormListModel = new BrainstormListModel();
+        $brainstormList = $brainstormListModel->where('verified', 'unverified')->findAll();
+        return view("admin/brainstorm/brainstorm_pending_list", [
+            "brainstorm" => $brainstormList,
+        ]);
+    }
+    public function brainstormCategories()
+    {
+        $data = [];
+
+        if ($this->request->getMethod() == "post"){
+
+            $rules = [
+                'name' => 'required|min_length[3]|max_length[12]',
+                'description' => 'required|max_length[150]',
+                'cover' => [
+                  'rules' => 'uploaded[cover]|max_size[cover, 1024]|is_image[cover]|mime_in[cover,image/jpg,image/jpeg,image/gif,image/png]',
+                ],
+            ];
+
+            $errors = [
+                'name' => [
+                    'required' => 'Name Must be Required',
+                    'min_length' => 'Name must be has minimum 3 Characters',
+                    'max_length' => 'Name not more than 12 Characters',
+                ],
+                'cover' => [
+                    'uploaded' => 'Please upload your category image',
+                    'max_size' => 'Your Uploaded image has too big',
+                    'mime_in' => 'Please upload only JPG, JPEG, GIF and PNG'
+                ],
+            ];
+
+            if (!$this->validate($rules, $errors)){
+                return view("admin/brainstorm/brainstorm_categories", [
+                    "validation" => $this->validator,
+                ]);
+            } else {
+                $file = $this->request->getFile("cover");
+
+                $session = session();
+                $category_image = $file->getName();
+                if ($file->move("images/categories", $category_image)){
+
+                    $categoryModel = new BrainstormCategoryModel();
+                    $data = [
+                        'category_name' => $this->request->getVar('name'),
+                        'category_description' => $this->request->getVar('description'),
+                        'category_image' => 'assets/images/categories/' . $category_image,
+                    ];
+
+                    if ($categoryModel->insert($data)){
+                        $session->setFlashdata('success', 'Category Saved Successfully');
+                        return redirect()->to(base_url("admin/brainstorm/brainstorm-categories"));
+                    } else {
+                        $session->setFlashdata('error', 'Failed to Save Category Try Again');
+                    }
+                } else {
+                    $session->setFlashdata('error', 'Your Image cannot be uploaded Please try again later.');
+                }
+            }
+
+        }
+        return view('admin/brainstorm/brainstorm_categories');
+    }
+    public function manageBrainstormCategories()
+    {
+        $categoryModel = new BrainstormCategoryModel();
+        $category = $categoryModel->findAll();
+        return view("admin/brainstorm/manage_brainstorm_categories", [
+            "categories" => $category,
+        ]);
+    }
+    public function editBrainstormCategories($id)
+    {
+        $categoryModel = new BrainstormCategoryModel();
+        $data['category'] = $categoryModel->find($id);
+
+        return view("admin/brainstorm/brainstorm_category_edit", $data);
+    }
+
+    /**
+     * @throws \ReflectionException
+     */
+    public function updateBrainstormCategories($id){
+        $categoryModel = new BrainstormCategoryModel();
+        if ($this->request->getMethod() == 'post') {
+            $file = $this->request->getFile("cover");
+            $category_image = $file->getName();
+            if (!$category_image){
+                $data = [
+                    'category_name' => $this->request->getVar('name'),
+                    'category_description' => $this->request->getVar('description'),
+                ];
+
+                $categoryModel->update($id, $data);
+                return redirect()->to(base_url("admin/brainstorm/manage-brainstorm"))->with('status', 'Category Updated Successfully');
+
+            } else {
+                    if ($file->move("assets/images/categories/", $category_image)){
+                        $data = [
+                            'category_name' => $this->request->getVar('name'),
+                            'category_description' => $this->request->getVar('description'),
+                            'category_image' => 'assets/images/categories/' . $category_image,
+                        ];
+
+                        $categoryModel->update($id, $data);
+                        return redirect()->to(base_url("admin/brainstorm/manage-brainstorm"))->with('status', 'Category Updated Successfully');
+                    }
+            }
+        }
+    }
+
+    public function deleteBrainstormCategories($id)
+    {
+        $categoryModel = new BrainstormCategoryModel();
+        $categoryModel->delete($id);
+        return redirect()->to(base_url("admin/brainstorm/manage-brainstorm"))->with('status', 'Category Deleted');
+    }
+    
+    public function viewBrainstorm($id)
+    {
+        
+    }
+    public function acceptBrainstorm($id)
+    {
+        $brainstormListModel = new BrainstormListModel();
+        $data = [
+            'verified' => 'verified',
+        ];
+        $brainstormListModel->update($id, $data);
+        return redirect()->to(base_url("admin/brainstorm/brainstorm-pending-list"))->with('status', 'Brainstorm Successfully Accepted');
+    }
+    /**
+     * -------------------------------------------------
+     * Candil modules - BrainStorm Management Section End
+     * -------------------------------------------------
+     */
+    /**
+     * -------------------------------------------------
+     * Candil modules - Thesis Management Section Start
+     * -------------------------------------------------
+     */
+    public function thesisLists() {
+        $thesisListModel = new ThesisListModel();
+        $thesisList = $thesisListModel->findAll();
+        return view("admin/thesis/thesis_list", [
+            "thesis" => $thesisList,
+        ]);
+    }
+    public function thesisPendingList()
+    {
+        $thesisListModel = new ThesisListModel();
+        $thesisList = $thesisListModel->where('verified', 'unverified')->findAll();
+        return view("admin/thesis/thesis_pending_list", [
+            "thesis" => $thesisList,
+        ]);
+    }
+    public function thesisCategories()
+    {
+        $data = [];
+
+        if ($this->request->getMethod() == "post"){
+
+            $rules = [
+                'name' => 'required|min_length[3]|max_length[12]',
+                'description' => 'required|max_length[150]',
+                'cover' => [
+                    'rules' => 'uploaded[cover]|max_size[cover, 1024]|is_image[cover]|mime_in[cover,image/jpg,image/jpeg,image/gif,image/png]',
+                ],
+            ];
+
+            $errors = [
+                'name' => [
+                    'required' => 'Name Must be Required',
+                    'min_length' => 'Name must be has minimum 3 Characters',
+                    'max_length' => 'Name not more than 12 Characters',
+                ],
+                'cover' => [
+                    'uploaded' => 'Please upload your category image',
+                    'max_size' => 'Your Uploaded image has too big',
+                    'mime_in' => 'Please upload only JPG, JPEG, GIF and PNG'
+                ],
+            ];
+
+            if (!$this->validate($rules, $errors)){
+                return view("admin/thesis/thesis_categories", [
+                    "validation" => $this->validator,
+                ]);
+            } else {
+                $file = $this->request->getFile("cover");
+
+                $session = session();
+                $category_image = $file->getName();
+                if ($file->move("images/categories", $category_image)){
+
+                    $categoryModel = new ThesisCategoryModel();
+                    $data = [
+                        'category_name' => $this->request->getVar('name'),
+                        'category_description' => $this->request->getVar('description'),
+                        'category_image' => 'assets/images/categories/' . $category_image,
+                    ];
+
+                    if ($categoryModel->insert($data)){
+                        $session->setFlashdata('success', 'Category Saved Successfully');
+                        return redirect()->to(base_url("admin/thesis/thesis-categories"));
+                    } else {
+                        $session->setFlashdata('error', 'Failed to Save Category Try Again');
+                    }
+                } else {
+                    $session->setFlashdata('error', 'Your Image cannot be uploaded Please try again later.');
+                }
+            }
+
+        }
+        return view('admin/thesis/thesis_categories');
+    }
+    public function manageThesisCategories()
+    {
+        $categoryModel = new ThesisCategoryModel();
+        $category = $categoryModel->findAll();
+        return view("admin/thesis/manage_thesis_categories", [
+            "categories" => $category,
+        ]);
+    }
+    public function editThesisCategories($id)
+    {
+        $categoryModel = new ThesisCategoryModel();
+        $data['category'] = $categoryModel->find($id);
+
+        return view("admin/thesis/thesis_category_edit", $data);
+    }
+
+    /**
+     * @throws \ReflectionException
+     */
+    public function updateThesisCategories($id){
+        $categoryModel = new ThesisCategoryModel();
+        if ($this->request->getMethod() == 'post') {
+            $file = $this->request->getFile("cover");
+            $category_image = $file->getName();
+            if (!$category_image){
+                $data = [
+                    'category_name' => $this->request->getVar('name'),
+                    'category_description' => $this->request->getVar('description'),
+                ];
+
+                $categoryModel->update($id, $data);
+                return redirect()->to(base_url("admin/thesis/manage-thesis"))->with('status', 'Category Updated Successfully');
+
+            } else {
+                if ($file->move("assets/images/categories/", $category_image)){
+                    $data = [
+                        'category_name' => $this->request->getVar('name'),
+                        'category_description' => $this->request->getVar('description'),
+                        'category_image' => 'assets/images/categories/' . $category_image,
+                    ];
+
+                    $categoryModel->update($id, $data);
+                    return redirect()->to(base_url("admin/thesis/manage-thesis"))->with('status', 'Category Updated Successfully');
+                }
+            }
+        }
+    }
+
+    public function deleteThesisCategories($id)
+    {
+        $categoryModel = new BrainstormCategoryModel();
+        $categoryModel->delete($id);
+        return redirect()->to(base_url("admin/thesis/manage-thesis"))->with('status', 'Category Deleted');
+    }
+
+    public function viewThesis($id)
+    {
+
+    }
+    public function acceptThesis($id)
+    {
+        $brainstormListModel = new BrainstormListModel();
+        $data = [
+            'verified' => 'verified',
+        ];
+        $brainstormListModel->update($id, $data);
+        return redirect()->to(base_url("admin/thesis/thesis-pending-list"))->with('status', 'Brainstorm Successfully Accepted');
+    }
+    /**
+     * -------------------------------------------------
+     * Candil modules - Thesis Management Section End
+     * -------------------------------------------------
+     */
+    /**
+     * -------------------------------------------------
+     * Candil modules - Hiring Management Section Start
+     * -------------------------------------------------
+     */
+    public function vacantList()
+    {
+        return view("admin/hiring/vacant_list");
+    }
+
+    public function pendingVacant()
+    {
+        return view("admin/hiring/pending_vacant");
+    }
+
+    public function hiringCategories()
+    {
+        return view("admin/hiring/hiring_categories");
+    }
+
+    public function manageHiringCategories()
+    {
+        return view("admin/hiring/manage_categories");
+    }
+
+    public function applicationList()
+    {
+        return view("admin/hiring/application_list");
     }
 }

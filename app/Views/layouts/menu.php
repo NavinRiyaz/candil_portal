@@ -90,16 +90,16 @@
                 <div class="collapse" id="brainstorm">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Brainstorm List</a>
+                            <a href="<?= base_url('admin/brainstorm-lists') ?>" class="nav-link">Brainstorm List</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Pending Brainstorms</a>
+                            <a href="<?= base_url('admin/brainstorm-pending-list') ?>" class="nav-link">Pending Brainstorms</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Brainstorm Categories</a>
+                            <a href="<?= base_url('admin/brainstorm-categories') ?>" class="nav-link">Brainstorm Categories</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Manage Categories</a>
+                            <a href="<?= base_url('admin/manage-brainstorm') ?>" class="nav-link">Manage Categories</a>
                         </li>
                     </ul>
                 </div>
@@ -113,16 +113,16 @@
                 <div class="collapse" id="thesis">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Thesis List</a>
+                            <a href="<?= base_url('admin/thesis-lists') ?>" class="nav-link">Thesis List</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Pending Thesis</a>
+                            <a href="<?= base_url('admin/thesis-pending-list') ?>" class="nav-link">Pending Thesis</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Thesis Categories</a>
+                            <a href="<?= base_url('admin/thesis-categories') ?>" class="nav-link">Thesis Categories</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Manage Categories</a>
+                            <a href="<?= base_url('admin/manage-thesis') ?>" class="nav-link">Manage Categories</a>
                         </li>
                     </ul>
                 </div>
@@ -136,22 +136,19 @@
                 <div class="collapse" id="hiring">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Vacant List</a>
+                            <a href="<?= base_url('admin/vacant-list') ?>" class="nav-link">Vacant List</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Pending Vacants</a>
+                            <a href="<?= base_url('admin/pending-vacant') ?>" class="nav-link">Pending Vacant</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Hiring Categories</a>
+                            <a href="<?= base_url('admin/hiring-categories') ?>" class="nav-link">Hiring Categories</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Manage Categories</a>
+                            <a href="<?= base_url('admin/manage-hiring-categories') ?>" class="nav-link">Manage Categories</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Applications List</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">Manage Applications</a>
+                            <a href="<?= base_url('admin/application-list') ?>" class="nav-link">Applications List</a>
                         </li>
                     </ul>
                 </div>

@@ -62,10 +62,40 @@ $routes->group('admin', ["filter" => "auth"], static function ($routes) {
     //User Management Staffs Section
     $routes->match(['get', 'post'], 'add-staffs', 'AdminController::addStaffs');
     $routes->match(['get', 'post'], 'manage-staffs', 'AdminController::manageStaffs');
-    $routes->match(['get', 'post'], 'staffs-documents', 'AdminController::staffDocuments');
+    $routes->match(['get', 'post'], 'staffs-documents', 'AdminController::staffsDocuments');
     $routes->match(['get', 'post'], 'staffs-edit/(:num)', 'AdminController::editStaffs/$1');
     $routes->match(['get', 'post'], 'staffs-delete/(:num)', 'AdminController::deleteStaffs/$1');
     $routes->match(['get', 'post'], 'staffs-update/(:num)', 'AdminController::updateStaffs/$1');
+
+    //Candil Portal Modules [Brainstorm Section]
+    $routes->match(['get', 'post'], 'brainstorm-lists', 'AdminController::brainstormLists');
+    $routes->match(['get', 'post'], 'brainstorm-pending-list', 'AdminController::brainstormPendingList');
+    $routes->match(['get', 'post'], 'brainstorm-categories', 'AdminController::brainstormCategories');
+    $routes->match(['get', 'post'], 'manage-brainstorm', 'AdminController::manageBrainstormCategories');
+    $routes->match(['get', 'post'], 'brainstorm-category-edit/(:num)', 'AdminController::editBrainstormCategories/$1');
+    $routes->match(['get', 'post'], 'brainstorm-category-delete/(:num)', 'AdminController::deleteBrainstormCategories/$1');
+    $routes->match(['get', 'post'], 'brainstorm-category-update/(:num)', 'AdminController::updateBrainstormCategories/$1');
+    $routes->match(['get', 'post'], 'brainstorm-view/(:num)', 'AdminController::viewBrainstorm/$1');
+    $routes->match(['get', 'post'], 'brainstorm-accept/(:num)', 'AdminController::acceptBrainstorm/$1');
+
+    //Candil Portal Modules [Thesis Section]
+    $routes->match(['get', 'post'], 'thesis-lists', 'AdminController::thesisLists');
+    $routes->match(['get', 'post'], 'thesis-pending-list', 'AdminController::thesisPendingList');
+    $routes->match(['get', 'post'], 'thesis-categories', 'AdminController::thesisCategories');
+    $routes->match(['get', 'post'], 'manage-thesis', 'AdminController::manageThesisCategories');
+    $routes->match(['get', 'post'], 'thesis-category-edit/(:num)', 'AdminController::editThesisCategories/$1');
+    $routes->match(['get', 'post'], 'thesis-category-delete/(:num)', 'AdminController::deleteThesisCategories/$1');
+    $routes->match(['get', 'post'], 'thesis-category-update/(:num)', 'AdminController::updateThesisCategories/$1');
+    $routes->match(['get', 'post'], 'thesis-view/(:num)', 'AdminController::viewThesis/$1');
+    $routes->match(['get', 'post'], 'thesis-accept/(:num)', 'AdminController::acceptThesis/$1');
+
+    //Candil Portal Modules [Hiring Section]
+    $routes->match(['get', 'post'], 'vacant-list', 'AdminController::vacantList');
+    $routes->match(['get', 'post'], 'pending-vacant', 'AdminController::pendingVacant');
+    $routes->match(['get', 'post'], 'hiring-categories', 'AdminController::hiringCategories');
+    $routes->match(['get', 'post'], 'manage-hiring-categories', 'AdminController::manageHiringCategories');
+    $routes->match(['get', 'post'], 'application-list', 'AdminController::applicationList');
+
 });
 
 
