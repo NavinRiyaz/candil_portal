@@ -4,10 +4,10 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class BrainstormListModel extends Model
+class JobModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'brainstorm_list';
+    protected $table            = 'jobs';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
@@ -15,14 +15,13 @@ class BrainstormListModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'name',
-        'user',
-        'category',
+        'title',
         'description',
-        'base_idea',
-        'first_phase',
-        'second_phase',
-        'verified',
+        'skills',
+        'tasks',
+        'requirements',
+        'benefits',
+        'uid',
     ];
 
     // Dates

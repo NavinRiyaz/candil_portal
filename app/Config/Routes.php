@@ -99,6 +99,14 @@ $routes->group('admin', ["filter" => "auth"], static function ($routes) {
 });
 
 
+//API Controllers
+$routes->match(['get', 'post'], 'api/create-brainstorm', 'ApiController::brainstormCreate');
+$routes->match(['get', 'post'], 'api/list-brainstorm', 'ApiController::brainstormList');
+$routes->match(['get', 'post'], 'api/create-job', 'ApiController::jobCreate');
+$routes->match(['get', 'post'], 'api/list-job', 'ApiController::jobList');
+$routes->match(['get', 'post'], 'api/create-thesis', 'ApiController::ThesisCreate');
+$routes->match(['get', 'post'], 'api/list-thesis', 'ApiController::ThesisList');
+
 $routes->get('logout', 'User::logout');
 
 /*
