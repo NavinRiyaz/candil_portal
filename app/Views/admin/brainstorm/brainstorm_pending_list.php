@@ -26,7 +26,6 @@
                                             <th>User Details</th>
                                             <th>Category</th>
                                             <th>Description</th>
-                                            <th>Cover Image</th>
                                             <th>Verification</th>
                                             <th>Action</th>
                                         </tr>
@@ -38,12 +37,12 @@
                                                 <td><?= $value['user'] ?></td>
                                                 <td><?= $value['category'] ?></td>
                                                 <td><?= $value['description'] ?></td>
-                                                <td><img src="<?= $value['cover_image'] ?>" alt="Brainstorm Cover Image" srcset=""></td>
                                                 <td>
-                                                    <span class="badge border border-danger text-danger"><?= $value['verified'] ?></span>
+                                                    <?php if($value['verified'] == 0) :?>
+                                                        <span class="badge border border-danger text-danger">Un verified</span>
+                                                    <?php endif;?>
                                                 </td>
                                                 <td>
-                                                    <a href="<?= base_url('admin/brainstorm-view/'.$value['id']) ?>" type="button" class="btn btn-primary btn-icon"><i data-feather="book-open"></i></a>
                                                     <a href="<?= base_url('admin/brainstorm-accept/'.$value['id']) ?>" type="button" class="btn btn-success btn-icon"><i data-feather="check-square"></i></a>
                                                 </td>
                                             </tr>

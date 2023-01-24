@@ -4,9 +4,13 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Database\Migrations\Brainstorm;
+use App\Models\AuctionModel;
+use App\Models\BidModel;
 use App\Models\BrainstormListModel;
 use App\Models\JobModel;
+use App\Models\SharkModel;
 use App\Models\ThesisListModel;
+use App\Models\UserModel;
 use CodeIgniter\API\ResponseTrait;
 
 class APIController extends BaseController
@@ -17,7 +21,7 @@ class APIController extends BaseController
         if ($this->request->getVar('uid') !== null){
             $brain = new BrainstormListModel();
             $data = [
-                'title' => $this->request->getVar('title'),
+                'name' => $this->request->getVar('title'),
                 'user' => $this->request->getVar('uid'),
                 'category' => $this->request->getVar('category'),
                 'description' => $this->request->getVar('description'),
@@ -45,9 +49,12 @@ class APIController extends BaseController
 
     public function brainstormList()
     {
-        $brain = new BrainstormListModel();
-        $data['brainstorm'] = $brain->orderBy('id', 'DESC')->findAll();
-        return $this->respond($data);
+        if($this->request->getVar("uid") !== null){
+            $brain = new BrainstormListModel();
+            $data = $brain->where('user', $this->request->getVar("uid"))->findAll();
+            return $this->respond($data);  
+        }
+        
     }
 
     public function jobCreate()
@@ -82,9 +89,12 @@ class APIController extends BaseController
 
     public function jobList()
     {
-      $job = new JobModel();
-      $data['jobs'] = $job->orderBy('id', 'DESC')->findAll();
-      return $this->respond($data);
+        
+        if($this->request->getVar("uid") !== null){
+            $job = new JobModel();
+            $data = $job->where('uid', $this->request->getVar("uid"))->findAll();
+            return $this->respond($data);  
+        }
     }
 
     /**
@@ -94,11 +104,8 @@ class APIController extends BaseController
     {
         if ($this->request->getVar('uid') !== null){
             $thesis = new ThesisListModel();
-            $file = $this->request->getFile('cover_image');
-            if (!$file->isValid()){
-                return $this->fail($file->getErrorString());
-            } else {
-                $file->move('./assets/uploads/thesis');
+            $file = $this->request->getFile('image');
+            $file->move('assets/uploads/thesis');
                 $data = [
                     'name' => $this->request->getVar('title'),
                     'user' => $this->request->getVar('uid'),
@@ -113,7 +120,6 @@ class APIController extends BaseController
                     'message' => 'Thesis Posted Successfully',
                 ];
                 return $this->respondCreated($response);
-            }
 
         }
         else {
@@ -126,8 +132,186 @@ class APIController extends BaseController
     }
     public function thesisList()
     {
+        if($this->request->getVar("uid") !== null){
+            $thesis = new ThesisListModel();
+            $data = $thesis->where('user', $this->request->getVar("uid"))->findAll();
+            return $this->respond($data);  
+        }
+    }
+
+    public function thesisAllList()
+    {
         $thesis = new ThesisListModel();
-        $data['thesis'] = $thesis->orderBy('id', 'DESC')->findAll();
+        $data = $thesis->findAll();
         return $this->respond($data);
+    }
+    
+    public function bidsCreate()
+    {
+        if ($this->request->getVar('uid') !== null){
+            $bids = new BidModel();
+            $data = [
+                'bid' => $this->request->getVar('bid'),
+                'duration' => $this->request->getVar('duration'),
+                'description' => $this->request->getVar('description'),
+                'milestone' => $this->request->getVar('milestone'),
+                'user' => $this->request->getVar('user'),
+                'job_id' => $this->request->getVar('job_id'),
+                'job_title' => $this->request->getVar('job_title'),
+            ];
+
+            $bids->insert($data);
+            $response = [
+                'status'   => 200,
+                'message' => 'Bid Placed Successfully',
+            ];
+            return $this->respondCreated($response);
+        } else {
+            $response = [
+                'status'   => 404,
+                'message' => 'API Not Found',
+            ];
+            return $this->respond($response);
+        }
+    }
+    public function bidsList(){
+        if($this->request->getVar("user") !== null){
+            $bids = new BidModel();
+            $data = $bids->where('user', $this->request->getVar("user"))->findAll();
+            return $this->respond($data);  
+        }
+    }
+
+    public function auctionCreate(){
+        if ($this->request->getVar('user') !== null){
+            $auction = new AuctionModel();
+            $data = [
+                'auction' => $this->request->getVar('auction'),
+                'duration' => $this->request->getVar('duration'),
+                'description' => $this->request->getVar('description'),
+                'user' => $this->request->getVar('user'),
+                'job_id' => $this->request->getVar('job_id'),
+                'job_title' => $this->request->getVar('job_title'),
+            ];
+
+            $auction->insert($data);
+            $response = [
+                'status'   => 200,
+                'message' => 'Auction Placed Successfully',
+            ];
+            return $this->respondCreated($response);
+        } else {
+            $response = [
+                'status'   => 404,
+                'message' => 'API Not Found',
+            ];
+            return $this->respond($response);
+        }
+    }
+
+    public function auctionList(){
+        if($this->request->getVar('user') !== null){
+            $auction = new AuctionModel();
+            $data = $auction->where('user', $this->request->getVar('user'))->findAll();
+            return $this->respond($data);
+        }
+    }
+
+    public function uploadResume()
+    {
+        if ($this->request->getVar('uid') !== null){
+            $user = new UserModel();
+            $file = $this->request->getFile('resume');
+            $file->move('assets/uploads/resume');
+            $data = [
+                'resume' => $file->getName(),
+            ];
+            $user->update('user_id', $data);
+            $response = [
+                'status'   => 200,
+                'message' => 'Resume Uploaded Successfully',
+            ];
+            return $this->respondCreated($response);
+
+        }
+    }
+
+    public function uploadDocuments()
+    {
+        if ($this->request->getVar('uid') !== null){
+            $user = new UserModel();
+            $file = $this->request->getFile('documents');
+            $file->move('assets/uploads/documents');
+            $data = [
+                'documents' => $file->getName(),
+            ];
+            $user->update('user_id', $data);
+            $response = [
+                'status'   => 200,
+                'message' => 'Document Uploaded Successfully',
+            ];
+            return $this->respondCreated($response);
+
+        }
+    }
+
+    public function userCreate()
+    {
+        if ($this->request->getVar('user') !== null){
+            $users = new UserModel();
+            $data = [
+                'user_id' => $this->request->getVar('user'),
+                'name' => $this->request->getVar('name'),
+                'email' => $this->request->getVar('email'),
+                'password' => password_hash($this->request->getVar('password'), PASSWORD_BCRYPT),
+                'phone' => $this->request->getVar('phone'),
+            ];
+
+            $users->insert($data);
+            $response = [
+                'status'   => 200,
+                'message' => 'User Created Successfully',
+            ];
+            return $this->respondCreated($response);
+        } else {
+            $response = [
+                'status'   => 404,
+                'message' => 'API Not Found',
+            ];
+            return $this->respond($response);
+        }
+    }
+    
+    public function createShark(){
+        if($this->request->getVar() !== null){
+            $shark = new SharkModel();
+            $data = [
+                'name' => $this->request->getVar('name'),
+                'phone' => $this->request->getVar('phone'),
+                'email' => $this->request->getVar('email'),
+                'uid' => $this->request->getVar('uid'),
+                'verified' => $this->request->getVar('verified'),
+            ];
+            $shark->insert($data);
+            $response = [
+                'status'   => 200,
+                'message' => 'Shark Member Created Successfully',
+            ];
+            return $this->respondCreated($response);
+        } else {
+            $response = [
+                'status'   => 404,
+                'message' => 'API Not Found',
+            ];
+            return $this->respond($response);
+        }
+    }
+    
+    public function listShark(){
+       if($this->request->getVar('uid') !== null){
+            $shark = new SharkModel();
+            $data = $shark->findAll();
+            return $this->respond($data);
+        } 
     }
 }

@@ -22,6 +22,7 @@ class JobModel extends Model
         'requirements',
         'benefits',
         'uid',
+        'verified',
     ];
 
     // Dates

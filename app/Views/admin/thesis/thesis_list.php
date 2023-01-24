@@ -39,7 +39,11 @@
                                                 <td><?= $value['description'] ?></td>
                                                 <td><img src="<?= $value['cover_image'] ?>" alt="Thesis Cover Image" srcset=""></td>
                                                 <td>
-                                                    <span class="badge border border-success text-success"><?= $value['verified'] ?></span>
+                                                    <?php if($value['verified'] == 1) :?>
+                                                        <span class="badge border border-success text-success">Verified</span>
+                                                    <?php else :?>
+                                                        <span class="badge border border-danger text-danger">Un verified</span>
+                                                    <?php endif;?>
                                                 </td>
                                             </tr>
                                         <?php endforeach;?>

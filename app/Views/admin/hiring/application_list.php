@@ -17,30 +17,22 @@
                         <?php endif; ?>
                         <div class="card">
                             <div class="card-body">
-                                <h6 class="card-title">Manage Candil Vacant Application List</h6>
+                                <h6 class="card-title">Manage Candil Application List</h6>
                                 <div class="table-responsive">
                                     <table id="dataTableExample" class="table">
                                         <thead>
                                         <tr>
                                             <th>Name</th>
-                                            <th>Employer Name</th>
-                                            <th>Vacant Name</th>
-                                            <th>Profile</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
+                                            <th>User Id</th>
+                                            <th>Bid Value</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <?php foreach ($hiring as $value) : ?>
+                                        <?php foreach ($bids as $value) : ?>
                                             <tr>
-                                                <td><?= $value['name'] ?></td>
+                                                <td><?= $value['job_title'] ?></td>
                                                 <td><?= $value['user'] ?></td>
-                                                <td><?= $value['category'] ?></td>
-                                                <td><?= $value['description'] ?></td>
-                                                <td><img src="<?= $value['cover_image'] ?>" alt="Brainstorm Cover Image" srcset=""></td>
-                                                <td>
-                                                    <span class="badge border border-success text-success"><?= $value['verified'] ?></span>
-                                                </td>
+                                                <td><?= $value['bid'] ?></td>
                                             </tr>
                                         <?php endforeach;?>
                                         </tbody>

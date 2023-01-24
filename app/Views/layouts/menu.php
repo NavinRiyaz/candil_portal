@@ -142,12 +142,6 @@
                             <a href="<?= base_url('admin/pending-vacant') ?>" class="nav-link">Pending Vacant</a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= base_url('admin/hiring-categories') ?>" class="nav-link">Hiring Categories</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url('admin/manage-hiring-categories') ?>" class="nav-link">Manage Categories</a>
-                        </li>
-                        <li class="nav-item">
                             <a href="<?= base_url('admin/application-list') ?>" class="nav-link">Applications List</a>
                         </li>
                     </ul>
@@ -162,16 +156,13 @@
                 <div class="collapse" id="bids">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Bids Wise List</a>
+                            <a href="<?= base_url('admin/bit-wise-list')?>" class="nav-link">Bids Wise List</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Highest Bids List</a>
+                            <a href="<?= base_url('admin/highest-bits-list')?>" class="nav-link">Highest Bids List</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Employers List (Bid Wise)</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">Bids Settings</a>
+                            <a href="<?= base_url('admin/employer-wise-list')?>" class="nav-link">Employers List (Bid Wise)</a>
                         </li>
                     </ul>
                 </div>
@@ -185,16 +176,13 @@
                 <div class="collapse" id="auctions">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Auction List</a>
+                            <a href="<?= base_url('admin/auction-list')?>" class="nav-link">Auction List</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Highest Auction List</a>
+                            <a href="<?= base_url('admin/high-auction-list')?>" class="nav-link">Highest Auction List</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Job List (Auction Wise)</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">Auction Settings</a>
+                            <a href="<?= base_url('admin/job-auction-list')?>" class="nav-link">Job List (Auction Wise)</a>
                         </li>
                     </ul>
                 </div>
@@ -208,36 +196,10 @@
                 <div class="collapse" id="shark">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Shark Members</a>
+                            <a href="<?= base_url('admin/shark-members')?>" class="nav-link">Shark Members</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Pending List</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">Manage Meeting Rooms</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">Approved Ideas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">Rejected Ideas</a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="collapse" href="#ondate" role="button" aria-expanded="false" aria-controls="ondate">
-                    <i class="link-icon" data-feather="calendar"></i>
-                    <span class="link-title">On Date</span>
-                    <i class="link-arrow" data-feather="chevron-down"></i>
-                </a>
-                <div class="collapse" id="ondate">
-                    <ul class="nav sub-menu">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">Schedule List</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">Documents</a>
+                            <a href="<?= base_url('admin/shark-pending-list')?>" class="nav-link">Pending List</a>
                         </li>
                     </ul>
                 </div>

@@ -26,7 +26,6 @@
                                             <th>User Details</th>
                                             <th>Category</th>
                                             <th>Description</th>
-                                            <th>Cover Image</th>
                                             <th>Verification</th>
                                         </tr>
                                         </thead>
@@ -37,9 +36,12 @@
                                                 <td><?= $value['user'] ?></td>
                                                 <td><?= $value['category'] ?></td>
                                                 <td><?= $value['description'] ?></td>
-                                                <td><img src="<?= $value['cover_image'] ?>" alt="Brainstorm Cover Image" srcset=""></td>
                                                 <td>
-                                                    <span class="badge border border-success text-success"><?= $value['verified'] ?></span>
+                                                    <?php if($value['verified'] == 1) :?>
+                                                        <span class="badge border border-success text-success">Verified</span>
+                                                    <?php else :?>
+                                                        <span class="badge border border-danger text-danger">Un verified</span>
+                                                    <?php endif;?>
                                                 </td>
                                             </tr>
                                         <?php endforeach;?>
