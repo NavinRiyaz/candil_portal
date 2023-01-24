@@ -4,14 +4,19 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Database\Migrations\BrainstormCategories;
+use App\Models\AuctionModel;
+use App\Models\BidModel;
 use App\Models\BrainstormListModel;
 use App\Models\BrainstormCategoryModel;
 use App\Models\CustomerModel;
 use App\Models\InvestorsModel;
+use App\Models\JobModel;
+use App\Models\SharkModel;
 use App\Models\StaffsModel;
 use App\Models\ThesisCategoryModel;
 use App\Models\ThesisListModel;
 use App\Models\UserModel;
+use Config\Database;
 use Config\Services;
 
 class AdminController extends BaseController
@@ -21,7 +26,30 @@ class AdminController extends BaseController
         if (session()->get('role') != "admin") {
             return view("errors/page_not_found");
         }
-        return view('admin/dashboard');
+
+        $db = Database::connect();
+        $users = $db->table('users');
+        $data['users'] = $users->countAll();
+
+        $shark = $db->table('shark');
+        $data['shark'] = $shark->countAll();
+
+        $bids = $db->table('bids');
+        $data['bids'] = $bids->countAll();
+
+        $brainstorm = $db->table('brainstorm_list');
+        $data['total_brainstorm'] = $brainstorm->countAll();
+
+        $brainstorm = $db->table('brainstorm_list');
+        $data['pending_brainstorm'] = $brainstorm->where('verified', '0')->countAll();
+
+        $thesis = $db->table('thesis_list');
+        $data['thesis'] = $thesis->get()->getResult();
+
+        $thesis = $db->table('shark');
+        $data['sharks'] = $thesis->get()->getResult();
+
+        return view('admin/dashboard', $data);
     }
 
 
@@ -345,7 +373,7 @@ class AdminController extends BaseController
     public function brainstormPendingList()
     {
         $brainstormListModel = new BrainstormListModel();
-        $brainstormList = $brainstormListModel->where('verified', 'unverified')->findAll();
+        $brainstormList = $brainstormListModel->where('verified', '0')->findAll();
         return view("admin/brainstorm/brainstorm_pending_list", [
             "brainstorm" => $brainstormList,
         ]);
@@ -463,16 +491,11 @@ class AdminController extends BaseController
         $categoryModel->delete($id);
         return redirect()->to(base_url("admin/brainstorm/manage-brainstorm"))->with('status', 'Category Deleted');
     }
-    
-    public function viewBrainstorm($id)
-    {
-        
-    }
     public function acceptBrainstorm($id)
     {
         $brainstormListModel = new BrainstormListModel();
         $data = [
-            'verified' => 'verified',
+            'verified' => '1',
         ];
         $brainstormListModel->update($id, $data);
         return redirect()->to(base_url("admin/brainstorm/brainstorm-pending-list"))->with('status', 'Brainstorm Successfully Accepted');
@@ -497,7 +520,7 @@ class AdminController extends BaseController
     public function thesisPendingList()
     {
         $thesisListModel = new ThesisListModel();
-        $thesisList = $thesisListModel->where('verified', 'unverified')->findAll();
+        $thesisList = $thesisListModel->where('verified', '0')->findAll();
         return view("admin/thesis/thesis_pending_list", [
             "thesis" => $thesisList,
         ]);
@@ -616,15 +639,11 @@ class AdminController extends BaseController
         return redirect()->to(base_url("admin/thesis/manage-thesis"))->with('status', 'Category Deleted');
     }
 
-    public function viewThesis($id)
-    {
-
-    }
     public function acceptThesis($id)
     {
         $brainstormListModel = new BrainstormListModel();
         $data = [
-            'verified' => 'verified',
+            'verified' => '1',
         ];
         $brainstormListModel->update($id, $data);
         return redirect()->to(base_url("admin/thesis/thesis-pending-list"))->with('status', 'Brainstorm Successfully Accepted');
@@ -641,26 +660,132 @@ class AdminController extends BaseController
      */
     public function vacantList()
     {
-        return view("admin/hiring/vacant_list");
+        $vacantModel = new JobModel();
+        $vacant = $vacantModel->findAll();
+        return view("admin/hiring/vacant_list", [
+            "vacant" => $vacant,
+        ]);
+    }
+
+    public function acceptVacant($id)
+    {
+        $vacantModel = new JobModel();
+        $data = [
+            'verified' => '1',
+        ];
+        $vacantModel->update($id, $data);
+        return redirect()->to(base_url("admin/hiring/vacant_list"))->with('status', 'Job Successfully Accepted');
     }
 
     public function pendingVacant()
     {
-        return view("admin/hiring/pending_vacant");
-    }
-
-    public function hiringCategories()
-    {
-        return view("admin/hiring/hiring_categories");
-    }
-
-    public function manageHiringCategories()
-    {
-        return view("admin/hiring/manage_categories");
+        $vacantModel = new JobModel();
+        $vacant = $vacantModel->where("verified", "0")->findAll();
+        return view("admin/hiring/pending_vacant", [
+            "vacant" => $vacant,
+        ]);
     }
 
     public function applicationList()
     {
-        return view("admin/hiring/application_list");
+        $bidModel = new BidModel();
+        $bids = $bidModel->groupBy("user")->findAll();
+        return view("admin/hiring/application_list", [
+            "bids" => $bids,
+        ]);
     }
+
+    /**
+     * -------------------------------------------------
+     * Candil modules - Bids Management Section Start
+     * -------------------------------------------------
+     */
+
+    public function bidWiseList()
+    {
+        $bidModel = new BidModel();
+        $bids = $bidModel->findAll();
+        return view("admin/bids/bit_wise_list", [
+            "bids" => $bids,
+        ]);
+    }
+
+    public function highestBidList()
+    {
+        $bidModel = new BidModel();
+        $bids = $bidModel->orderBy('bid', 'DESC')->findAll();
+        return view("admin/bids/highest_bits_list", [
+            "bids" => $bids,
+        ]);
+    }
+
+    public function employerList()
+    {
+        $bidModel = new BidModel();
+        $bids = $bidModel->orderBy('bid', 'DESC')->findAll();
+        return view("admin/bids/employer_wise_list", [
+            "bids" => $bids,
+        ]);
+    }
+
+    /**
+     * -------------------------------------------------
+     * Candil modules - Auction Management Section Start
+     * -------------------------------------------------
+     */
+
+     public function auctionList(){
+        $auctionModel = new AuctionModel();
+        $auction = $auctionModel->findAll();
+        return view("admin/auctions/auction_list", [
+            "auction" => $auction,
+        ]);
+     }
+
+     public function highestAuctionList(){
+        $auctionModel = new AuctionModel();
+        $auction = $auctionModel->orderBy('auction', 'DESC')->findAll();
+        return view("admin/auctions/highest_auction", [
+            "auction" => $auction,
+        ]);
+     }
+
+     public function jobAuctionList(){
+        $auctionModel = new AuctionModel();
+        $auction = $auctionModel->orderBy('job_title', 'DESC')->findAll();
+        return view("admin/auctions/job_auction_list", [
+            "auction" => $auction,
+        ]);
+     }
+
+      /**
+     * -------------------------------------------------
+     * Candil modules - Shark Members Management Section Start
+     * -------------------------------------------------
+     */
+
+     public function sharkMembers(){
+        $sharkModel = new SharkModel();
+        $shark = $sharkModel->findAll();
+        return view("admin/sharks/shark_list", [
+            "shark" => $shark,
+        ]);
+     }
+
+     public function sharkPendingList(){
+        $sharkModel = new SharkModel();
+        $shark = $sharkModel->where('verified', '0')->findAll();
+        return view("admin/sharks/shark_pending_list", [
+            "shark" => $shark,
+        ]);
+     }
+
+     public function acceptShark($id){
+        $sharkModel = new SharkModel();
+        $data = [
+            'verified' => '1',
+        ];
+        $sharkModel->update($id, $data);
+        return redirect()->to(base_url("admin/sharks/shark_list"))->with('status', 'Shark Member Successfully Accepted');
+     }
 }

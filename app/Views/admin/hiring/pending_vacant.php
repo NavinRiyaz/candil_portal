@@ -1,1 +1,62 @@
-<?php
+<?= view('layouts/header') ?>
+    <div class="main-wrapper">
+        <?= view('layouts/menu') ?>
+
+        <div class="page-wrapper">
+            <?= view('layouts/top_navigation') ?>
+
+            <div class="page-content">
+                <div class="row">
+                    <div class="col-md-12 grid-margin stretch-card">
+                        <?php if (session()->getFlashdata('status')): ?>
+                            <div class="col-12">
+                                <div class="alert alert-success" role="alert">
+                                    <?= session()->getFlashdata('status')  ?>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="card-title">Manage Candil Verified Job List</h6>
+                                <div class="table-responsive">
+                                    <table id="dataTableExample" class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>User Details</th>
+                                            <th>Skills</th>
+                                            <th>Description</th>
+                                            <th>Verification</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php foreach ($vacant as $value) : ?>
+                                            <tr>
+                                                <td><?= $value['title'] ?></td>
+                                                <td><?= $value['uid'] ?></td>
+                                                <td><?= $value['skills'] ?></td>
+                                                <td><?= $value['description'] ?></td>
+                                                <td>
+                                                    <?php if($value['verified'] == 0) :?>
+                                                        <span class="badge border border-danger text-danger">Un verified</span>
+                                                    <?php endif;?>
+                                                </td>
+                                                <td>
+                                                    <a href="<?= base_url('admin/vacant-accept/'.$value['id']) ?>" type="button" class="btn btn-success btn-icon"><i data-feather="check-square"></i></a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach;?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <?= view('layouts/footer_second') ?>
+        </div>
+    </div>
+<?= view('layouts/footer') ?>

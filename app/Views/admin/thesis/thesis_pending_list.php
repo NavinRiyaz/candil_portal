@@ -40,10 +40,11 @@
                                             <td><?= $value['description'] ?></td>
                                             <td><img src="<?= $value['cover_image'] ?>" alt="Brainstorm Cover Image" srcset=""></td>
                                             <td>
-                                                <span class="badge border border-danger text-danger"><?= $value['verified'] ?></span>
+                                                <?php if($value['verified'] == 0) :?>
+                                                    <span class="badge border border-danger text-danger">Un verified</span>
+                                                <?php endif;?>
                                             </td>
                                             <td>
-                                                <a href="<?= base_url('admin/thesis-view/'.$value['id']) ?>" type="button" class="btn btn-primary btn-icon"><i data-feather="book-open"></i></a>
                                                 <a href="<?= base_url('admin/thesis-accept/'.$value['id']) ?>" type="button" class="btn btn-success btn-icon"><i data-feather="check-square"></i></a>
                                             </td>
                                         </tr>

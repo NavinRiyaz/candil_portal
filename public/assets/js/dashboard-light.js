@@ -698,7 +698,7 @@ $(function() {
         height: 260,
         type: "radialBar"
       },
-      series: [80],
+      series: [0],
       colors: [colors.primary],
       plotOptions: {
         radialBar: {

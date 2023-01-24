@@ -40,18 +40,11 @@
                                             <a type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
                                             </a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="eye" class="icon-sm me-2"></i> <span class="">View</span></a>
-                                                <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="edit-2" class="icon-sm me-2"></i> <span class="">Edit</span></a>
-                                                <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="trash" class="icon-sm me-2"></i> <span class="">Delete</span></a>
-                                                <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="printer" class="icon-sm me-2"></i> <span class="">Print</span></a>
-                                                <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="download" class="icon-sm me-2"></i> <span class="">Download</span></a>
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6 col-md-12 col-xl-5">
-                                            <h3 class="mb-2">0</h3>
+                                            <h3 class="mb-2"><?= $users ?></h3>
                                             <div class="d-flex align-items-baseline">
                                                 <!-- <p class="text-success">
                                                   <span></span>
@@ -75,18 +68,11 @@
                                             <a type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
                                             </a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="eye" class="icon-sm me-2"></i> <span class="">View</span></a>
-                                                <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="edit-2" class="icon-sm me-2"></i> <span class="">Edit</span></a>
-                                                <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="trash" class="icon-sm me-2"></i> <span class="">Delete</span></a>
-                                                <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="printer" class="icon-sm me-2"></i> <span class="">Print</span></a>
-                                                <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="download" class="icon-sm me-2"></i> <span class="">Download</span></a>
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6 col-md-12 col-xl-5">
-                                            <h3 class="mb-2">0</h3>
+                                            <h3 class="mb-2"><?= $shark ?></h3>
                                             <div class="d-flex align-items-baseline">
                                                 <!-- <p class="text-danger">
                                                   <span></span>
@@ -110,18 +96,11 @@
                                             <a type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
                                             </a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                                                <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="eye" class="icon-sm me-2"></i> <span class="">View</span></a>
-                                                <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="edit-2" class="icon-sm me-2"></i> <span class="">Edit</span></a>
-                                                <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="trash" class="icon-sm me-2"></i> <span class="">Delete</span></a>
-                                                <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="printer" class="icon-sm me-2"></i> <span class="">Print</span></a>
-                                                <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="download" class="icon-sm me-2"></i> <span class="">Download</span></a>
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6 col-md-12 col-xl-5">
-                                            <h3 class="mb-2">0</h3>
+                                            <h3 class="mb-2"><?= $bids ?></h3>
                                             <div class="d-flex align-items-baseline">
                                                 <!-- <p class="text-success">
                                                   <span>+2.8%</span>
@@ -150,26 +129,11 @@
                                     <a type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
                                     </a>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
-                                        <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="eye" class="icon-sm me-2"></i> <span class="">View</span></a>
-                                        <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="edit-2" class="icon-sm me-2"></i> <span class="">Edit</span></a>
-                                        <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="trash" class="icon-sm me-2"></i> <span class="">Delete</span></a>
-                                        <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="printer" class="icon-sm me-2"></i> <span class="">Print</span></a>
-                                        <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="download" class="icon-sm me-2"></i> <span class="">Download</span></a>
-                                    </div>
                                 </div>
                             </div>
                             <div class="row align-items-start">
                                 <div class="col-md-7">
-                                    <p class="text-muted tx-13 mb-3 mb-md-0">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                </div>
-                                <div class="col-md-5 d-flex justify-content-md-end">
-                                    <div class="btn-group mb-3 mb-md-0" role="group" aria-label="Basic example">
-                                        <button type="button" class="btn btn-outline-primary">Today</button>
-                                        <button type="button" class="btn btn-outline-primary d-none d-md-block">Week</button>
-                                        <button type="button" class="btn btn-primary">Month</button>
-                                        <button type="button" class="btn btn-outline-primary">Year</button>
-                                    </div>
+                                    <p class="text-muted tx-13 mb-3 mb-md-0">Auction List Status</p>
                                 </div>
                             </div>
                             <div id="revenueChart" ></div>
@@ -197,7 +161,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <p class="text-muted">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                            <p class="text-muted">Bidding Status Graphical Representation</p>
                             <div id="monthlySalesChart"></div>
                         </div>
                     </div>
@@ -211,13 +175,6 @@
                                     <a type="button" id="dropdownMenuButton5" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
                                     </a>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton5">
-                                        <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="eye" class="icon-sm me-2"></i> <span class="">View</span></a>
-                                        <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="edit-2" class="icon-sm me-2"></i> <span class="">Edit</span></a>
-                                        <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="trash" class="icon-sm me-2"></i> <span class="">Delete</span></a>
-                                        <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="printer" class="icon-sm me-2"></i> <span class="">Print</span></a>
-                                        <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="download" class="icon-sm me-2"></i> <span class="">Download</span></a>
-                                    </div>
                                 </div>
                             </div>
                             <div id="storageChart"></div>
@@ -225,13 +182,13 @@
                                 <div class="col-6 d-flex justify-content-end">
                                     <div>
                                         <label class="d-flex align-items-center justify-content-end tx-10 text-uppercase fw-bolder">Total Brainstorms Posted <span class="p-1 ms-1 rounded-circle bg-secondary"></span></label>
-                                        <h5 class="fw-bolder mb-0 text-end">0</h5>
+                                        <h5 class="fw-bolder mb-0 text-end"><?= $total_brainstorm ?></h5>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div>
-                                        <label class="d-flex align-items-center tx-10 text-uppercase fw-bolder"><span class="p-1 me-1 rounded-circle bg-primary"></span> Today Posted Brainstorms</label>
-                                        <h5 class="fw-bolder mb-0">0</h5>
+                                        <label class="d-flex align-items-center tx-10 text-uppercase fw-bolder"><span class="p-1 me-1 rounded-circle bg-primary"></span> Pending Posted Brainstorms</label>
+                                        <h5 class="fw-bolder mb-0"><?= $pending_brainstorm ?></h5>
                                     </div>
                                 </div>
                             </div>
@@ -253,76 +210,28 @@
                                     <a type="button" id="dropdownMenuButton6" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
                                     </a>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton6">
-                                        <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="eye" class="icon-sm me-2"></i> <span class="">View</span></a>
-                                        <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="edit-2" class="icon-sm me-2"></i> <span class="">Edit</span></a>
-                                        <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="trash" class="icon-sm me-2"></i> <span class="">Delete</span></a>
-                                        <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="printer" class="icon-sm me-2"></i> <span class="">Print</span></a>
-                                        <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="download" class="icon-sm me-2"></i> <span class="">Download</span></a>
-                                    </div>
                                 </div>
                             </div>
                             <div class="d-flex flex-column">
+                                <?php 
+                                    if($thesis != null):
+                                        foreach($thesis as $value):
+                                ?>
                                 <a href="javascript:;" class="d-flex align-items-center border-bottom pb-3">
                                     <div class="me-3">
-                                        <img src="https://via.placeholder.com/35x35" class="rounded-circle wd-35" alt="user">
+                                        <img src="<?= $value['cover_image']?>" class="rounded-circle wd-35" alt="user">
                                     </div>
                                     <div class="w-100">
                                         <div class="d-flex justify-content-between">
-                                            <h6 class="text-body mb-2">Author Name</h6>
-                                            <p class="text-muted tx-12">12.30 PM</p>
+                                            <h6 class="text-body mb-2"><?= $value['name']?></h6>
+                                            <p class="text-muted tx-12"><?= $value['log']?></p>
                                         </div>
-                                        <p class="text-muted tx-13">Category or Description</p>
+                                        <p class="text-muted tx-13"><?= $value['description']?></p>
                                     </div>
                                 </a>
-                                <a href="javascript:;" class="d-flex align-items-center border-bottom py-3">
-                                    <div class="me-3">
-                                        <img src="https://via.placeholder.com/35x35" class="rounded-circle wd-35" alt="user">
-                                    </div>
-                                    <div class="w-100">
-                                        <div class="d-flex justify-content-between">
-                                            <h6 class="text-body mb-2">Author Name</h6>
-                                            <p class="text-muted tx-12">02.14 AM</p>
-                                        </div>
-                                        <p class="text-muted tx-13">Category or Description</p>
-                                    </div>
-                                </a>
-                                <a href="javascript:;" class="d-flex align-items-center border-bottom py-3">
-                                    <div class="me-3">
-                                        <img src="https://via.placeholder.com/35x35" class="rounded-circle wd-35" alt="user">
-                                    </div>
-                                    <div class="w-100">
-                                        <div class="d-flex justify-content-between">
-                                            <h6 class="text-body mb-2">Author Name</h6>
-                                            <p class="text-muted tx-12">08.22 PM</p>
-                                        </div>
-                                        <p class="text-muted tx-13">Category or Description</p>
-                                    </div>
-                                </a>
-                                <a href="javascript:;" class="d-flex align-items-center border-bottom py-3">
-                                    <div class="me-3">
-                                        <img src="https://via.placeholder.com/35x35" class="rounded-circle wd-35" alt="user">
-                                    </div>
-                                    <div class="w-100">
-                                        <div class="d-flex justify-content-between">
-                                            <h6 class="text-body mb-2">Author Name</h6>
-                                            <p class="text-muted tx-12">05.49 AM</p>
-                                        </div>
-                                        <p class="text-muted tx-13">Category or Description</p>
-                                    </div>
-                                </a>
-                                <a href="javascript:;" class="d-flex align-items-center border-bottom py-3">
-                                    <div class="me-3">
-                                        <img src="https://via.placeholder.com/35x35" class="rounded-circle wd-35" alt="user">
-                                    </div>
-                                    <div class="w-100">
-                                        <div class="d-flex justify-content-between">
-                                            <h6 class="text-body mb-2">Author Name</h6>
-                                            <p class="text-muted tx-12">01.19 AM</p>
-                                        </div>
-                                        <p class="text-muted tx-13">Category or Description</p>
-                                    </div>
-                                </a>
+                                <?php endforeach; else: ?>
+                                    <p class="text-muted tx-12">No Data Found</p>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -336,13 +245,6 @@
                                     <a type="button" id="dropdownMenuButton7" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
                                     </a>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton7">
-                                        <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="eye" class="icon-sm me-2"></i> <span class="">View</span></a>
-                                        <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="edit-2" class="icon-sm me-2"></i> <span class="">Edit</span></a>
-                                        <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="trash" class="icon-sm me-2"></i> <span class="">Delete</span></a>
-                                        <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="printer" class="icon-sm me-2"></i> <span class="">Print</span></a>
-                                        <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="download" class="icon-sm me-2"></i> <span class="">Download</span></a>
-                                    </div>
                                 </div>
                             </div>
                             <div class="table-responsive">
@@ -350,62 +252,40 @@
                                     <thead>
                                     <tr>
                                         <th class="pt-0">#</th>
-                                        <th class="pt-0">Idea Name</th>
-                                        <th class="pt-0">Category</th>
-                                        <th class="pt-0">Document Type</th>
+                                        <th class="pt-0">Name</th>
+                                        <th class="pt-0">Phone</th>
+                                        <th class="pt-0">Email</th>
                                         <th class="pt-0">Status</th>
-                                        <th class="pt-0">Investor Approch</th>
                                     </tr>
                                     </thead>
                                     <tbody>
+                                        <?php 
+                                            if($sharks != null):
+                                                $sno = 1;
+                                                foreach($sharks as $value):
+                                        ?>
                                     <tr>
-                                        <td>1</td>
-                                        <td>Idea Name</td>
-                                        <td>Science and Technology</td>
-                                        <td>PDF</td>
-                                        <td><span class="badge bg-success">Verified</span></td>
-                                        <td>Investor Name</td>
+                                        <td><?= $sno; ?></td>
+                                        <td><?= $value['name']; ?></td>
+                                        <td><?= $value['phone']; ?></td>
+                                        <td><?= $value['email']; ?></td>
+                                        <td>
+                                            <?php if($value['verified'] == 0): ?>
+                                                <span class="badge bg-danger">Un Verified</span>
+                                            <?php else:?>
+                                                <span class="badge bg-success">Verified</span>
+                                            <?php endif; ?>
+                                        </td>
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Idea Name</td>
-                                        <td>Science and Technology</td>
-                                        <td>PDF</td>
-                                        <td><span class="badge bg-danger">Rejected</span></td>
-                                        <td>Investor Name</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Idea Name</td>
-                                        <td>Science and Technology</td>
-                                        <td>PDF</td>
-                                        <td><span class="badge bg-warning">Under Verify</span></td>
-                                        <td>Investor Name</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Idea Name</td>
-                                        <td>Science and Technology</td>
-                                        <td>PDF</td>
-                                        <td><span class="badge bg-info">Meeting Scheduled</span></td>
-                                        <td>Investor Name</td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>Idea Name</td>
-                                        <td>Science and Technology</td>
-                                        <td>PDF</td>
-                                        <td><span class="badge bg-danger">Rejected</span></td>
-                                        <td>Investor Name</td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td>Idea Name</td>
-                                        <td>Science and Technology</td>
-                                        <td>PDF</td>
-                                        <td><span class="badge bg-success">Verified</span></td>
-                                        <td>Investor Name</td>
-                                    </tr>
+                                    <?php
+                                                $sno++;
+                                            endforeach;
+                                        else:
+                                    ?>
+                                    <span class="badge bg-danger">No Data Found</span>
+                                    <?php
+                                        endif;
+                                    ?>
                                     </tbody>
                                 </table>
                             </div>
